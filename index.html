@@ -3,30 +3,56 @@
     <head>
         <title>Flash Cards</title>
         <!-- We've provided some styles for you, aren't we nice? -->
-        <link rel="stylesheet" type="text/css" href="reset.css" />
-        <link rel="stylesheet" type="text/css" href="style.css" />
+        <link rel="stylesheet" type="text/css" href="/css/reset.css" />
+        <link rel="stylesheet" type="text/css" href="/css/style.css" />
     </head>
-    <body ng-app="flashCards" ng-controller="MainController">
-    	<div
-    		ng-repeat="flashCard in flashCards | orderBy : 'question'"
-    		class="flash-card">
-    	    <h1>{{ flashCard.question | uppercase }}</h1>
-    	    <ul class="flash-card-answers">
-    	    	<li
-    	    		ng-repeat="answer in flashCard.answers"
-    	    		class="flash-card-answer"
-    	    		ng-click="answerQuestion(answer, flashCard)">{{ answer.text }}</li>
-    	    </ul>
-    	    <h2
-    	    	class="answer-feedback"
-    	    	ng-class="flashCard.answeredCorrectly ? 'correct' : 'incorrect'"
-    	    	ng-show="flashCard.answered">
-    	        <span ng-show="flashCard.answeredCorrectly">Yeah, you got it right!</span>
-    	        <span ng-show="!flashCard.answeredCorrectly">Nope, you got it wrong.</span>
-    	    </h2>
-    	</div>
-    	<script src="angular.js"></script>
-    	<script src="app.js"></script>
-    	<script src="main.controller.js"></script>
+    <body ng-app="flashCards">
+
+        <div ng-controller="MainController">
+        <div ng-controller="StatsController" id="statistics">
+        <button  class="category-button" ng-repeat="category in categories" ng-click="getCategoryCards(category)"
+        ng-class="{active: selected===category}">
+            {{category}}
+        </button>
+        <button class="category-button reset" ng-class="{active: selected==='all'}" ng-click="resetCategories()">All Categories</button>
+            <div id="scoreboard" ng-include="'templates/statistics.html'">
+            </div>
+        
+        </div>
+            <div
+                ng-repeat="flashCard in flashCards | orderBy : 'question'"
+                class="flash-card">
+                <h1>{{ flashCard.question | uppercase }}</h1>
+<!--            WITH CHEAT FILTER:     
+                <ul class="flash-card-answers">
+                    <li
+                        ng-repeat="answer in flashCard.answers | cheat"
+                        class="flash-card-answer"
+                        ng-click="answerQuestion(answer, flashCard)">{{ answer.text }}</li>
+                </ul> -->
+                <ul class="flash-card-answers">
+                    <li
+                        ng-repeat="answer in flashCard.answers"
+                        class="flash-card-answer"
+                        ng-click="answerQuestion(answer, flashCard)">{{ answer.text }}</li>
+                </ul>
+                <h2
+                    class="answer-feedback"
+                    ng-class="flashCard.answeredCorrectly ? 'correct' : 'incorrect'"
+                    ng-show="flashCard.answered">
+                    <span ng-show="flashCard.answeredCorrectly">Yeah, you got it right!</span>
+                    <span ng-show="!flashCard.answeredCorrectly">Nope, you got it wrong.</span>
+                </h2>
+                <h3 class="category-type">Category: {{flashCard.category}}</h3>
+            </div>
+        </div>
+
+    	<script src="/js/lib/angular.js"></script>
+    	<script src="/js/app.js"></script>
+        <script src="/js/filters/cheat.js"></script>
+        <script src="js/factories/ScoreFactory.js"></script>
+        <script src="js/factories/FlashCardsFactory.js"></script>
+        <script src="/js/controllers/main.controller.js"></script>
+        <script src="/js/controllers/StatsController.js"></script>
     </body>
 </html>

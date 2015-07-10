@@ -24,6 +24,9 @@
     font-size: 40px;
     text-align: center;
     margin-bottom: 40px; }
+  .flash-card h3{
+    padding-top: 30px;
+  }
   .flash-card .flash-card-answers {
     width: 100%;
     margin: 0 auto;
@@ -75,4 +78,5 @@
       #statistics #scoreboard h3:last-child {
         margin-right: 0; }
       #statistics #scoreboard h3 span {
-        font-weight: bold; }
+        font-weight: bold;
+        display: inline; }
