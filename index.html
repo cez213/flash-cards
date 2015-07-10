@@ -7,17 +7,17 @@
         <link rel="stylesheet" type="text/css" href="/css/style.css" />
     </head>
     <body ng-app="flashCards">
-
         <div ng-controller="MainController">
+
         <div ng-controller="StatsController" id="statistics">
+            <div id="scoreboard" ng-include="'templates/statistics.html'">
+            </div>
+
         <button  class="category-button" ng-repeat="category in categories" ng-click="getCategoryCards(category)"
         ng-class="{active: selected===category}">
             {{category}}
         </button>
         <button class="category-button reset" ng-class="{active: selected==='all'}" ng-click="resetCategories()">All Categories</button>
-            <div id="scoreboard" ng-include="'templates/statistics.html'">
-            </div>
-        
         </div>
             <div
                 ng-repeat="flashCard in flashCards | orderBy : 'question'"

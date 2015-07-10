@@ -1,7 +1,7 @@
 app.controller('MainController', function ($scope, FlashCardsFactory, ScoreFactory) {
 	FlashCardsFactory.getFlashCards()
-			.then(function(data){
-				$scope.flashCards = data;
+			.then(function(cards){
+				$scope.flashCards = cards;
 			}).then(null, function(err){
 				return next(err);
 			})
@@ -10,8 +10,8 @@ app.controller('MainController', function ($scope, FlashCardsFactory, ScoreFacto
 		if (!flashCard.answered) {
 			flashCard.answered = true;
 			flashCard.answeredCorrectly = answer.correct;
-			if(flashCard.answeredCorrectly) ScoreFactory.correct += 1;
-			else ScoreFactory.incorrect += 1;
+			if(flashCard.answeredCorrectly) ScoreFactory.correct ++;
+			else ScoreFactory.incorrect ++;
 		}
 	};
 
@@ -24,18 +24,18 @@ app.controller('MainController', function ($scope, FlashCardsFactory, ScoreFacto
 
 	$scope.selected = 'all';
 	$scope.getCategoryCards = function(category){
+		$scope.selected = category;
 		FlashCardsFactory.getFlashCards(category)
 			.then(function(data){
 				$scope.flashCards = data;
-				$scope.selected = category;
 			})
 	}
 
 	$scope.resetCategories = function(){
+		$scope.selected = 'all';
 		FlashCardsFactory.getFlashCards()
 				.then(function(data){
 				$scope.flashCards = data;
-				$scope.selected = 'all';
 			})
 	}
 
