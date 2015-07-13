@@ -1,6 +1,8 @@
 var path = require('path');
 var express = require('express');
 var FlashCardModel = require('./models/flash-card-model');
+// NOTE: need node-sass-middleware for scss file to compile
+
 
 var app = express(); // Create an express app!
 module.exports = app; // Export it so it can be require('')'d

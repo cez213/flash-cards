@@ -21,7 +21,10 @@
         <button class="category-button reset" ng-class="{active: selected==='all'}" ng-click="resetCategories()">All Categories</button>
         </div>
 
-        <flash-card ng-repeat="flashCard in flashCards" card="flashCard"></flash-card>
+        <flash-card 
+          ng-repeat="flashCard in flashCards | orderBy: 'question'" 
+          card="flashCard">
+        </flash-card>
         </div>
     </div>
 

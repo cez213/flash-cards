@@ -13,7 +13,7 @@ app.directive('flashCard', function(FlashCardsFactory, ScoreFactory){
 			}
 		},
 		scope: {
-			card: '='
+			card: '=' //specify what we are getting in a is a javascript variable
 		}
 	}
 })
